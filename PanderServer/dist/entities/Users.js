@@ -52,7 +52,16 @@ __decorate([
     typegoose_1.prop(),
     __metadata("design:type", String)
 ], Users.prototype, "password", void 0);
+__decorate([
+    typegoose_1.prop({ default: new Date(), required: true, nullable: true }),
+    __metadata("design:type", Date)
+], Users.prototype, "createdAt", void 0);
+__decorate([
+    typegoose_1.prop({ default: new Date(), required: true }),
+    __metadata("design:type", Date)
+], Users.prototype, "lastLogin", void 0);
 Users = __decorate([
+    type_graphql_1.ArgsType(),
     type_graphql_1.ObjectType({ description: "The Users model" })
 ], Users);
 exports.Users = Users;

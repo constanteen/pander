@@ -1,6 +1,6 @@
-import { ObjectType, Field } from "type-graphql";
+import { ObjectType, Field, ArgsType } from "type-graphql";
 import { prop as Property, getModelForClass } from "@typegoose/typegoose";
-
+@ArgsType()
 @ObjectType({ description: "The Users model" })
 export class Users {
     @Field(() => String)
@@ -8,30 +8,36 @@ export class Users {
 
     @Field() 
     @Property({ unique: true })
-    username!: String;
+    username!: string;
 
     @Field() 
     @Property()
-    firstname!: String;
+    firstname!: string;
 
     @Field() 
     @Property()
-    lastname!: String;
+    lastname!: string;
 
     @Field()
     @Property()
-    email!: String;
+    email!: string;
 
     @Field() 
     @Property()
-    position!: String;
+    position!: string;
 
     @Field()
     @Property()
-    role!: String;
+    role!: string;
 
     @Property()
-    password!: String;
+    password!: string;
+
+    @Property({ default: new Date(), required: true, nullable: true })
+    createdAt!: Date;
+    
+    @Property({ default: new Date(), required: true })
+    lastLogin!: Date;
 }
 
 export const UsersModel = getModelForClass(Users);

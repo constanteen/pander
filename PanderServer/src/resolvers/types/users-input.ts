@@ -1,33 +1,39 @@
 import { InputType, Field } from 'type-graphql';
-import { Length } from 'class-validator';
+import { IsDate, Length } from 'class-validator';
 import { Users } from '../../entities/Users';
 
 @InputType()
 export class UsersInput implements Partial<Users> {
     @Field()
     @Length(1, 255)
-	username!: String;
+	username!: string;
 
 	@Field()
 	@Length(1, 255)
-	firstname!: String;
+	firstname!: string;
 
 	@Field()
-	lastname!: String;
+	lastname!: string;
 
     @Field()
     @Length(1, 255)
-	email!: String;
+	email!: string;
 
 	@Field()
 	@Length(1, 255)
-	position!: String;
+	position!: string;
 
     @Field()
     @Length(1, 255)
-    role!: String;
+    role!: string;
     
     @Field()
 	@Length(1, 255)
-	password!: String;
+	password!: string;
+
+	@IsDate()
+	createdAt!: Date;
+
+	@IsDate()
+	lastLogin!: Date;
 }

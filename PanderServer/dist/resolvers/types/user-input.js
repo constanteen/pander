@@ -9,54 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersInput = void 0;
+exports.UserInput = void 0;
 const type_graphql_1 = require("type-graphql");
 const class_validator_1 = require("class-validator");
-let UsersInput = class UsersInput {
+let UserInput = class UserInput {
 };
 __decorate([
     type_graphql_1.Field(),
     class_validator_1.Length(1, 255),
     __metadata("design:type", String)
-], UsersInput.prototype, "username", void 0);
+], UserInput.prototype, "username", void 0);
 __decorate([
     type_graphql_1.Field(),
     class_validator_1.Length(1, 255),
     __metadata("design:type", String)
-], UsersInput.prototype, "firstname", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], UsersInput.prototype, "lastname", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    class_validator_1.Length(1, 255),
-    __metadata("design:type", String)
-], UsersInput.prototype, "email", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    class_validator_1.Length(1, 255),
-    __metadata("design:type", String)
-], UsersInput.prototype, "position", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    class_validator_1.Length(1, 255),
-    __metadata("design:type", String)
-], UsersInput.prototype, "role", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    class_validator_1.Length(1, 255),
-    __metadata("design:type", String)
-], UsersInput.prototype, "password", void 0);
+], UserInput.prototype, "password", void 0);
 __decorate([
     class_validator_1.IsDate(),
     __metadata("design:type", Date)
-], UsersInput.prototype, "createdAt", void 0);
-__decorate([
-    class_validator_1.IsDate(),
-    __metadata("design:type", Date)
-], UsersInput.prototype, "lastLogin", void 0);
-UsersInput = __decorate([
+], UserInput.prototype, "lastLogin", void 0);
+UserInput = __decorate([
     type_graphql_1.InputType()
-], UsersInput);
-exports.UsersInput = UsersInput;
+], UserInput);
+exports.UserInput = UserInput;

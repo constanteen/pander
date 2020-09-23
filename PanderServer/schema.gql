@@ -6,41 +6,69 @@
 """The Customers model"""
 type Customers {
   chassisNumber: String!
+  cylinders: String!
   DOB: String!
   email: String!
   engineNumber: String!
+  exteriorColor: String!
   firstname: String!
+  fuelType: String!
   id: String!
   lastname: String!
+  lastVisit: Timestamp
   modelYear: Float!
   phone: String!
+  transmission: String!
   vehicleModel: String!
   vehicleName: String!
 }
 
 input CustomersInput {
   chassisNumber: String!
+  cylinders: String!
   DOB: String!
   email: String!
   engineNumber: String!
+  exteriorColor: String!
   firstname: String!
+  fuelType: String!
   lastname: String!
+  lastVisit: Timestamp!
   modelYear: Float!
   phone: String!
+  transmission: String!
   vehicleModel: String!
   vehicleName: String!
 }
 
 type Mutation {
   createCustomer(data: CustomersInput!): Customers!
-  createUser(data: UsersInput!): Users!
+  createUser(data: UsersInput!): [Users!]!
+  deleteUser(id: String!): Boolean!
 }
 
 type Query {
   findACustomer(id: String!): [Customers!]!
   findAUser(id: String!): [Users!]!
   listAllUsers: [Users!]!
+  loginUser(data: UserInput!): [User!]!
   returnAllCustomers: [Customers!]!
+}
+
+"""
+The javascript `Date` as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+"""The User model"""
+type User {
+  password: String!
+  username: String!
+}
+
+input UserInput {
+  password: String!
+  username: String!
 }
 
 """The Users model"""

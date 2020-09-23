@@ -1,6 +1,7 @@
 import { Customers, CustomersModel } from '../entities/Customers';
 import { Resolver, Query, Arg, Mutation } from 'type-graphql';
 import { CustomersInput } from './types/customers-input';
+import { checkEmailInDB } from '../utils/uniqueEmail';
 
 @Resolver(Customers)
 export class CustomersResolver {
@@ -16,35 +17,12 @@ export class CustomersResolver {
 
 	@Mutation(() => Customers)
 	async createCustomer(
-		@Arg('data')
-		{
-			firstname,
-			lastname,
-			email,
-			DOB,
-			phone,
-			vehicleName,
-			vehicleModel,
-			modelYear,
-			chassisNumber,
-			engineNumber,
-			createdAt,
-		}: CustomersInput
-	): Promise<Customers> {
+		@Arg('data')Customers: CustomersInput
+	): Promise<Customers | Error> {
+		const customers = await CustomersModel.find({ email: Customers.email });
+		checkEmailInDB(customers);
 		const customer = (
-			await CustomersModel.create({
-				firstname,
-				lastname,
-				email,
-				DOB,
-				phone,
-				vehicleName,
-				vehicleModel,
-				modelYear,
-				chassisNumber,
-				engineNumber,
-				createdAt,
-			})
+			await CustomersModel.create(Customers)
 		).save();
 		return customer;
 	}

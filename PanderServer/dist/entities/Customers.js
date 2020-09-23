@@ -69,10 +69,36 @@ __decorate([
     __metadata("design:type", String)
 ], Customers.prototype, "engineNumber", void 0);
 __decorate([
+    type_graphql_1.Field(),
+    typegoose_1.prop({ required: true }),
+    __metadata("design:type", String)
+], Customers.prototype, "fuelType", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    typegoose_1.prop({ required: true }),
+    __metadata("design:type", String)
+], Customers.prototype, "transmission", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    typegoose_1.prop({ required: true }),
+    __metadata("design:type", String)
+], Customers.prototype, "cylinders", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    typegoose_1.prop({ required: true }),
+    __metadata("design:type", String)
+], Customers.prototype, "exteriorColor", void 0);
+__decorate([
+    type_graphql_1.Field({ nullable: true }),
+    typegoose_1.prop(),
+    __metadata("design:type", Date)
+], Customers.prototype, "lastVisit", void 0);
+__decorate([
     typegoose_1.prop({ default: new Date(), required: true, nullable: true }),
     __metadata("design:type", Date)
 ], Customers.prototype, "createdAt", void 0);
 Customers = __decorate([
+    type_graphql_1.ArgsType(),
     type_graphql_1.ObjectType({ description: 'The Customers model' })
 ], Customers);
 exports.Customers = Customers;

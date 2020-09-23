@@ -64,6 +64,31 @@ __decorate([
     __metadata("design:type", String)
 ], CustomersInput.prototype, "engineNumber", void 0);
 __decorate([
+    type_graphql_1.Field(),
+    class_validator_1.Length(1, 255),
+    __metadata("design:type", String)
+], CustomersInput.prototype, "fuelType", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    class_validator_1.Length(1, 255),
+    __metadata("design:type", String)
+], CustomersInput.prototype, "transmission", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    class_validator_1.IsNumber(),
+    __metadata("design:type", String)
+], CustomersInput.prototype, "cylinders", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    class_validator_1.Length(1, 255),
+    __metadata("design:type", String)
+], CustomersInput.prototype, "exteriorColor", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    class_validator_1.IsDate(),
+    __metadata("design:type", Date)
+], CustomersInput.prototype, "lastVisit", void 0);
+__decorate([
     class_validator_1.IsDate(),
     __metadata("design:type", Date)
 ], CustomersInput.prototype, "createdAt", void 0);

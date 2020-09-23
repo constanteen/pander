@@ -5,7 +5,7 @@ import { graphqlHTTP } from 'express-graphql';
 import { connect } from 'mongoose';
 
 import { CustomersResolver } from './resolvers/Customers';
-import { UsersResolver } from './resolvers/User';
+import { UsersResolver } from './resolvers/Users';
 
 // Construct a schema using graphql schema language
 const main = async () => {

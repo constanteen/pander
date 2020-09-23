@@ -16,6 +16,7 @@ exports.CustomersResolver = void 0;
 const Customers_1 = require("../entities/Customers");
 const type_graphql_1 = require("type-graphql");
 const customers_input_1 = require("./types/customers-input");
+const uniqueEmail_1 = require("../utils/uniqueEmail");
 let CustomersResolver = class CustomersResolver {
     async findACustomer(id) {
         return await Customers_1.CustomersModel.find({ _id: id });
@@ -23,20 +24,10 @@ let CustomersResolver = class CustomersResolver {
     async returnAllCustomers() {
         return await Customers_1.CustomersModel.find();
     }
-    async createCustomer({ firstname, lastname, email, DOB, phone, vehicleName, vehicleModel, modelYear, chassisNumber, engineNumber, createdAt, }) {
-        const customer = (await Customers_1.CustomersModel.create({
-            firstname,
-            lastname,
-            email,
-            DOB,
-            phone,
-            vehicleName,
-            vehicleModel,
-            modelYear,
-            chassisNumber,
-            engineNumber,
-            createdAt,
-        })).save();
+    async createCustomer(Customers) {
+        const customers = await Customers_1.CustomersModel.find({ email: Customers.email });
+        uniqueEmail_1.checkEmailInDB(customers);
+        const customer = (await Customers_1.CustomersModel.create(Customers)).save();
         return customer;
     }
 };

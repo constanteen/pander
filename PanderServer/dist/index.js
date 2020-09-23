@@ -9,11 +9,11 @@ const type_graphql_1 = require("type-graphql");
 const express_graphql_1 = require("express-graphql");
 const mongoose_1 = require("mongoose");
 const Customers_1 = require("./resolvers/Customers");
-const User_1 = require("./resolvers/User");
+const Users_1 = require("./resolvers/Users");
 // Construct a schema using graphql schema language
 const main = async () => {
     const schema = await type_graphql_1.buildSchema({
-        resolvers: [Customers_1.CustomersResolver, User_1.UsersResolver],
+        resolvers: [Customers_1.CustomersResolver, Users_1.UsersResolver],
         emitSchemaFile: true,
         validate: false,
         dateScalarMode: 'timestamp',

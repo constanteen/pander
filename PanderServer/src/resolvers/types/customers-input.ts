@@ -1,5 +1,5 @@
 import { InputType, Field } from 'type-graphql';
-import { IsDate, IsEmail, Length } from 'class-validator';
+import { IsDate, IsEmail, IsNumber, Length } from 'class-validator';
 import { Customers } from '../../entities/Customers';
 
 @InputType()
@@ -42,6 +42,26 @@ export class CustomersInput implements Partial<Customers> {
 	@Field()
 	@Length(1, 255)
 	engineNumber!: string;
+
+	@Field()
+	@Length(1, 255)
+	fuelType!: string;
+
+	@Field()
+	@Length(1, 255)
+	transmission!: string;
+
+	@Field()
+	@IsNumber()
+	cylinders!: string;
+
+	@Field()
+	@Length(1, 255)
+	exteriorColor!: string;
+
+	@Field()
+	@IsDate()
+	lastVisit!: Date;
 
 	@IsDate()
 	createdAt!: Date;
