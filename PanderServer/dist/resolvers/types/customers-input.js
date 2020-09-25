@@ -84,7 +84,6 @@ __decorate([
     __metadata("design:type", String)
 ], CustomersInput.prototype, "exteriorColor", void 0);
 __decorate([
-    type_graphql_1.Field(),
     class_validator_1.IsDate(),
     __metadata("design:type", Date)
 ], CustomersInput.prototype, "lastVisit", void 0);

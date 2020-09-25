@@ -63,8 +63,7 @@ export class Customers {
 	@Property({ required: true })
 	exteriorColor!: string;
 
-	@Field({ nullable: true })
-	@Property()
+	@Property({default: new Date()})
 	lastVisit!: Date;
 
 	@Property({ default: new Date(), required: true, nullable: true })

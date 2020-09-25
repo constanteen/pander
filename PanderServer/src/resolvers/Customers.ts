@@ -17,13 +17,22 @@ export class CustomersResolver {
 
 	@Mutation(() => Customers)
 	async createCustomer(
-		@Arg('data')Customers: CustomersInput
+		@Arg('data') Customers: CustomersInput
 	): Promise<Customers | Error> {
+		// Error is here because I am still trying to figure out error classes in graphql
 		const customers = await CustomersModel.find({ email: Customers.email });
 		checkEmailInDB(customers);
-		const customer = (
-			await CustomersModel.create(Customers)
-		).save();
+		const customer = (await CustomersModel.create(Customers)).save();
 		return customer;
+	}
+
+	@Mutation(() => Boolean)
+	async deleteCustomer(@Arg('id') id: string): Promise<Boolean> {
+		// Error is here because I am still trying to figure out error classes in graphql
+		const deleted = await CustomersModel.findOneAndDelete({ _id: id });
+		if (deleted) {
+			return true;
+		}
+		return false;
 	}
 }

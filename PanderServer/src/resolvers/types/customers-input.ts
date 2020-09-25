@@ -59,7 +59,6 @@ export class CustomersInput implements Partial<Customers> {
 	@Length(1, 255)
 	exteriorColor!: string;
 
-	@Field()
 	@IsDate()
 	lastVisit!: Date;
 

@@ -89,8 +89,7 @@ __decorate([
     __metadata("design:type", String)
 ], Customers.prototype, "exteriorColor", void 0);
 __decorate([
-    type_graphql_1.Field({ nullable: true }),
-    typegoose_1.prop(),
+    typegoose_1.prop({ default: new Date() }),
     __metadata("design:type", Date)
 ], Customers.prototype, "lastVisit", void 0);
 __decorate([

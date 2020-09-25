@@ -15,7 +15,6 @@ type Customers {
   fuelType: String!
   id: String!
   lastname: String!
-  lastVisit: Timestamp
   modelYear: Float!
   phone: String!
   transmission: String!
@@ -33,7 +32,6 @@ input CustomersInput {
   firstname: String!
   fuelType: String!
   lastname: String!
-  lastVisit: Timestamp!
   modelYear: Float!
   phone: String!
   transmission: String!
@@ -44,6 +42,7 @@ input CustomersInput {
 type Mutation {
   createCustomer(data: CustomersInput!): Customers!
   createUser(data: UsersInput!): [Users!]!
+  deleteCustomer(id: String!): Boolean!
   deleteUser(id: String!): Boolean!
 }
 
@@ -51,19 +50,8 @@ type Query {
   findACustomer(id: String!): [Customers!]!
   findAUser(id: String!): [Users!]!
   listAllUsers: [Users!]!
-  loginUser(data: UserInput!): [User!]!
+  loginUser(data: UserInput!): [Users!]!
   returnAllCustomers: [Customers!]!
-}
-
-"""
-The javascript `Date` as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
-"""
-scalar Timestamp
-
-"""The User model"""
-type User {
-  password: String!
-  username: String!
 }
 
 input UserInput {

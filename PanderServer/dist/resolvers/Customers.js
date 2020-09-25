@@ -25,10 +25,19 @@ let CustomersResolver = class CustomersResolver {
         return await Customers_1.CustomersModel.find();
     }
     async createCustomer(Customers) {
+        // Error is here because I am still trying to figure out error classes in graphql
         const customers = await Customers_1.CustomersModel.find({ email: Customers.email });
         uniqueEmail_1.checkEmailInDB(customers);
         const customer = (await Customers_1.CustomersModel.create(Customers)).save();
         return customer;
+    }
+    async deleteCustomer(id) {
+        // Error is here because I am still trying to figure out error classes in graphql
+        const deleted = await Customers_1.CustomersModel.findOneAndDelete({ _id: id });
+        if (deleted) {
+            return true;
+        }
+        return false;
     }
 };
 __decorate([
@@ -51,6 +60,13 @@ __decorate([
     __metadata("design:paramtypes", [customers_input_1.CustomersInput]),
     __metadata("design:returntype", Promise)
 ], CustomersResolver.prototype, "createCustomer", null);
+__decorate([
+    type_graphql_1.Mutation(() => Boolean),
+    __param(0, type_graphql_1.Arg('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], CustomersResolver.prototype, "deleteCustomer", null);
 CustomersResolver = __decorate([
     type_graphql_1.Resolver(Customers_1.Customers)
 ], CustomersResolver);

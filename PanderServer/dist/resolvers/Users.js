@@ -22,7 +22,7 @@ const users_input_1 = require("./types/users-input");
 const user_input_1 = require("./types/user-input");
 const argon2_1 = __importDefault(require("argon2"));
 const uniqueEmail_1 = require("../utils/uniqueEmail");
-const User_1 = require("../entities/User");
+// import { User } from '../entities/User';
 let UsersResolver = class UsersResolver {
     async findAUser(id) {
         return await Users_1.UsersModel.find({ _id: id });
@@ -31,6 +31,7 @@ let UsersResolver = class UsersResolver {
         return await Users_1.UsersModel.find();
     }
     async loginUser({ username, password, lastLogin }) {
+        // Undefined is here because I am still trying to figure out error classes in graphql
         const user = await Users_1.UsersModel.find({ username: username });
         if (!user) {
             // Throw new error
@@ -49,9 +50,20 @@ let UsersResolver = class UsersResolver {
     }
     async createUser(Users) {
         const newuser = await Users_1.UsersModel.find({ email: Users.email });
+        // Check if username exists.
+        // convert username to small letter before saving
+        const smallUserName = Users.username.toLowerCase();
+        const usernameExists = await Users_1.UsersModel.find({ username: smallUserName });
+        if (usernameExists) {
+            throw new Error('Username already exists');
+        }
         uniqueEmail_1.checkEmailInDB(newuser);
         const hashedPassword = await argon2_1.default.hash(Users.password);
-        const user = (await Users_1.UsersModel.create({ ...Users, password: hashedPassword })).save();
+        const user = (await Users_1.UsersModel.create({
+            ...Users,
+            password: hashedPassword,
+            username: smallUserName,
+        })).save();
         return user;
     }
     async deleteUser(id) {
@@ -76,7 +88,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersResolver.prototype, "listAllUsers", null);
 __decorate([
-    type_graphql_1.Query(() => [User_1.User]),
+    type_graphql_1.Query(() => [Users_1.Users]),
     __param(0, type_graphql_1.Arg('data')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [user_input_1.UserInput]),

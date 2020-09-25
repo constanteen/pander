@@ -1,0 +1,1 @@
+A customer management database for a fictional auto maintenance and sales company
