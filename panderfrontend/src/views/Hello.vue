@@ -8,8 +8,10 @@
 import gql from 'graphql-tag';
 
 export default {
-  data: {
-    hello: '',
+  data: function() {
+    return {
+      hello: 'world',
+    }
   },
   apollo: {
     hello: gql`

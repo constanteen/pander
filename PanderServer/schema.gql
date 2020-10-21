@@ -41,16 +41,17 @@ input CustomersInput {
 
 type Mutation {
   createCustomer(data: CustomersInput!): Customers!
-  createUser(data: UsersInput!): [Users!]!
+  createUser(data: UsersInput!): Users!
   deleteCustomer(id: String!): Boolean!
   deleteUser(id: String!): Boolean!
+  loginUser(data: UserInput!): Users!
 }
 
 type Query {
   findACustomer(id: String!): [Customers!]!
   findAUser(id: String!): [Users!]!
+  hello: String!
   listAllUsers: [Users!]!
-  loginUser(data: UserInput!): [Users!]!
   returnAllCustomers: [Customers!]!
 }
 

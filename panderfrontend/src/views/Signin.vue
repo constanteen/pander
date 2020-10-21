@@ -1,7 +1,7 @@
 <template>
-  <el-container style="width: 600px;">
+  <el-container style="width: 600px">
     <el-card class="box-card">
-      <el-form ref="signInForm" :model="signInForm">
+      <el-form ref="signInForm" :model="signInForm" >
         <div class="panda">
           <pandaimage />
         </div>
@@ -18,7 +18,7 @@
             placeholder="Password"
           ></el-input>
         </el-form-item>
-        <el-form-item style="text-align: center;" ref="button">
+        <el-form-item style="text-align: center" ref="button">
           <el-button type="primary" @click="submitForm('signInForm')"
             >Log In</el-button
           >
@@ -45,8 +45,15 @@ export default {
   },
   methods: {
     submitForm() {
-      console.log(this.signInForm.username, 'username');
-      console.log(this.signInForm.password, 'password');
+      if (
+        this.signInForm.username.length > 3 &&
+        this.signInForm.password.length > 6
+      ) {
+        this.$apollo.query.loginUser({username: this.signInForm.username, password: this.signInForm.password});
+        console.log('passed')
+        return true;
+      }
+      console.log('not working');
     },
   },
 };
@@ -58,6 +65,9 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.el-form-item {
+  margin-bottom: -5px;
 }
 .el-input {
   padding: 1rem 0;

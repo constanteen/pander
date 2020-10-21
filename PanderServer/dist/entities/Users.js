@@ -15,7 +15,7 @@ const typegoose_1 = require("@typegoose/typegoose");
 let Users = class Users {
 };
 __decorate([
-    type_graphql_1.Field(() => String),
+    type_graphql_1.Field(),
     __metadata("design:type", String)
 ], Users.prototype, "id", void 0);
 __decorate([

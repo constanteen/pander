@@ -30,7 +30,7 @@ let UsersResolver = class UsersResolver {
     async listAllUsers() {
         return await Users_1.UsersModel.find();
     }
-    async loginUser({ username, password, lastLogin }) {
+    async loginUser({ username, password }) {
         // Undefined is here because I am still trying to figure out error classes in graphql
         const user = await Users_1.UsersModel.find({ username: username });
         if (!user) {
@@ -45,7 +45,6 @@ let UsersResolver = class UsersResolver {
             return;
         }
         await Users_1.UsersModel.updateOne({ _id: user[0].id }, { $set: { lastLogin: new Date() } });
-        console.log('User: ', user);
         return user[0];
     }
     async createUser(Users) {
@@ -54,7 +53,7 @@ let UsersResolver = class UsersResolver {
         // convert username to small letter before saving
         const smallUserName = Users.username.toLowerCase();
         const usernameExists = await Users_1.UsersModel.find({ username: smallUserName });
-        if (usernameExists) {
+        if (usernameExists.length > 0) {
             throw new Error('Username already exists');
         }
         uniqueEmail_1.checkEmailInDB(newuser);
@@ -88,14 +87,14 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersResolver.prototype, "listAllUsers", null);
 __decorate([
-    type_graphql_1.Query(() => [Users_1.Users]),
+    type_graphql_1.Mutation(() => Users_1.Users),
     __param(0, type_graphql_1.Arg('data')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [user_input_1.UserInput]),
     __metadata("design:returntype", Promise)
 ], UsersResolver.prototype, "loginUser", null);
 __decorate([
-    type_graphql_1.Mutation(() => [Users_1.Users]),
+    type_graphql_1.Mutation(() => Users_1.Users),
     __param(0, type_graphql_1.Arg('data')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [users_input_1.UsersInput]),

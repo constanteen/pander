@@ -4,6 +4,7 @@ import { UsersInput } from './types/users-input';
 import { UserInput } from './types/user-input';
 import argon2 from 'argon2';
 import { checkEmailInDB } from '../utils/uniqueEmail';
+
 // import { User } from '../entities/User';
 
 @Resolver(Users)
@@ -18,10 +19,9 @@ export class UsersResolver {
 		return await UsersModel.find();
 	}
 
-	@Query(() => [Users])
+	@Mutation(() => Users)
 	async loginUser(
-		@Arg('data')
-		{ username, password, lastLogin }: UserInput
+		@Arg('data') { username, password }: UserInput
 	): Promise<Users | undefined> {
 		// Undefined is here because I am still trying to figure out error classes in graphql
 		const user = await UsersModel.find({ username: username });
@@ -40,18 +40,17 @@ export class UsersResolver {
 			{ _id: user[0].id },
 			{ $set: { lastLogin: new Date() } }
 		);
-		console.log('User: ', user);
 		return user[0];
 	}
 
-	@Mutation(() => [Users])
+	@Mutation(() => Users)
 	async createUser(@Arg('data') Users: UsersInput): Promise<Users | Error> {
 		const newuser = await UsersModel.find({ email: Users.email });
 		// Check if username exists.
 		// convert username to small letter before saving
 		const smallUserName = Users.username.toLowerCase();
 		const usernameExists = await UsersModel.find({ username: smallUserName });
-		if (usernameExists) {
+		if (usernameExists.length > 0) {
 			throw new Error('Username already exists');
 		}
 		checkEmailInDB(newuser);
